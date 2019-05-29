@@ -1,0 +1,59 @@
+<template>
+    <div>
+        <b-form class="p-4 m-2" @submit="onSubmit" @reset="onReset" v-if="show">
+            <b-form-group label="Usuario: ">
+                <b-form-input type="text" v-model="form.user" placeholder="Ingrese su usuario" required></b-form-input>
+            </b-form-group>
+            <b-form-group label="Password: ">
+                <b-input-group class="mt-3">
+                    <b-input-group-text slot="append"><font-awesome-icon :icon="ic_password" @click="showPassword"/></b-input-group-text>
+                    <b-form-input :type="type_password_input" v-model="form.password" placeholder="Ingrese su contraseña" required></b-form-input>
+                </b-input-group>
+            </b-form-group>
+            <div class="text-right">
+                <router-link to="/recoveryPassword">Recuperar contraseña</router-link>
+                <b-button-group class="d-block">
+                    <b-button type="reset" variant="danger">Cancelar</b-button>
+                    <b-button type="submit" variant="primary">Entrar</b-button>
+                </b-button-group>
+            </div>
+        </b-form>
+    </div>
+</template>
+<script>
+export default {
+
+    data(){
+        return{
+            form: {
+                user: '',
+                password: ''
+            },
+            show: true,
+            ic_password: 'eye-slash',
+            type_password_input : 'password'
+        }
+    },
+    methods:{
+        onSubmit(evt) {
+            evt.preventDefault();
+            alert(JSON.stringify(this.form));
+        },
+        onReset(evt) {
+            evt.preventDefault();
+            // Reset our form values
+            this.form.user = '';
+            this.form.password = '';
+            // Trick to reset/clear native browser form validation state
+            this.show = false
+            this.$nextTick(() => {
+            this.show = true
+            });
+        },
+        showPassword(){
+            this.ic_password = this.ic_password == 'eye' ? 'eye-slash' : 'eye';
+            this.type_password_input = this.type_password_input == 'text' ? 'password' : 'text';
+        }
+    }
+}
+</script>
