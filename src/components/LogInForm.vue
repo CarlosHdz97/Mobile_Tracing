@@ -5,18 +5,20 @@
                 <b-form-input type="text" v-model="form.user" placeholder="Ingrese su usuario" required></b-form-input>
             </b-form-group>
             <b-form-group label="Password: ">
-                <b-input-group class="mt-3">
+                <b-input-group>
                     <b-input-group-text slot="append"><font-awesome-icon :icon="ic_password" @click="showPassword"/></b-input-group-text>
                     <b-form-input :type="type_password_input" v-model="form.password" placeholder="Ingrese su contraseña" required></b-form-input>
                 </b-input-group>
+                <router-link to="/recoveryPassword">Recuperar contraseña</router-link> <br>
             </b-form-group>
-            <div class="text-right">
-                <router-link to="/recoveryPassword">Recuperar contraseña</router-link>
-                <b-button-group class="d-block">
-                    <b-button type="reset" variant="danger">Cancelar</b-button>
-                    <b-button type="submit" variant="primary">Entrar</b-button>
-                </b-button-group>
-            </div>
+                <div class="d-flex justify-content-end">
+                    <b-button-group class="d-block">
+                        <b-button type="reset" variant="danger">Cancelar</b-button>
+                        <b-button type="submit" variant="primary">
+                            <b-spinner small :hidden="form.loading"></b-spinner>{{form.btn_msg}}
+                        </b-button>
+                    </b-button-group>
+                </div>
         </b-form>
     </div>
 </template>
@@ -27,16 +29,20 @@ export default {
         return{
             form: {
                 user: '',
-                password: ''
+                password: '',
+                btn_msg : 'Iniciar sesión',
+                loading : true
             },
             show: true,
             ic_password: 'eye-slash',
-            type_password_input : 'password'
+            type_password_input : 'password',
         }
     },
     methods:{
         onSubmit(evt) {
             evt.preventDefault();
+            this.form.btn_msg = 'cargando....';
+            this.form.loading = false;
             alert(JSON.stringify(this.form));
         },
         onReset(evt) {
@@ -45,9 +51,11 @@ export default {
             this.form.user = '';
             this.form.password = '';
             // Trick to reset/clear native browser form validation state
-            this.show = false
+            this.show = false;
             this.$nextTick(() => {
-            this.show = true
+            this.show = true;
+            this.form.loading = true;
+            this.form.btn_msg = 'Iniciar sesión'
             });
         },
         showPassword(){
