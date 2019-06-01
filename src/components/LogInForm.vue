@@ -23,8 +23,8 @@
     </div>
 </template>
 <script>
+import {mapMutations} from 'vuex'
 export default {
-
     data(){
         return{
             form: {
@@ -39,12 +39,20 @@ export default {
         }
     },
     methods:{
+        ...mapMutations(['authentication']),
         onSubmit(evt) {
             evt.preventDefault();
             this.form.btn_msg = 'cargando....';
             this.form.loading = false;
+
             if(this.form.user =="Carlos" && this.form.password=="12345"){
-                this.$store.state.auth.authenticate = true;
+                var data = {
+                    "auth" : true,
+                    "jwt" : "dsads",
+                    "rol" : [1,3,5],
+                    "permissions" : ["eee"]
+                };
+                this.$store.commit('authentication',data);
                 this.$router.push({path:'mobile'});
                 alert("Bienvenido");
             }else{
