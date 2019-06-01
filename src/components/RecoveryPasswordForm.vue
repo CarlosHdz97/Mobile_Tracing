@@ -1,17 +1,15 @@
 <template>
-    <div>
-        <b-form class="p-4 m-2" @submit="onSubmit" @reset="onReset" v-if="show">
-            <b-form-group label="Usuario: ">
-                <b-form-input type="text" v-model="form.user" placeholder="Ingrese su usuario" required></b-form-input>
-            </b-form-group>
-            <div class="text-right">
-                <b-button-group>
-                    <router-link to="/"  class="text-light"><b-button  type="reset" variant="danger">Cancelar</b-button></router-link>
-                    <b-button type="submit" variant="primary">Entrar</b-button>
-                </b-button-group>
-            </div>
-        </b-form>
-    </div>
+    <b-form class="p-4 m-2" @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form-group label="Usuario: ">
+            <b-form-input type="text" v-model="form.user" placeholder="Ingrese su usuario" required></b-form-input>
+        </b-form-group>
+        <div class="text-right">
+            <b-button-group>
+                <router-link to="/"  class="text-light"><b-button  type="reset" variant="danger">Cancelar</b-button></router-link>
+                <b-button type="submit" variant="primary">Entrar</b-button>
+            </b-button-group>
+        </div>
+    </b-form>
 </template>
 <script>
 export default {

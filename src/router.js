@@ -20,12 +20,30 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/RecoveryPassword.vue')
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/mobile',
+      meta: {requiresAuth: false},
+      redirect: '/',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import('./views/Mobile.vue'),
+      children : [
+        {
+          path: '',
+          component: () => import('./components/MobileList.vue')
+        },
+        {
+          path: 'create',
+          component: () => import('./components/MobileForm.vue')
+        },
+        {
+          path: 'assign',
+          component: () => import('./components/AssignMobileForm.vue')
+        },{
+          path: 'devolution',
+          component: () => import('./components/DevolutionMobileForm.vue')
+        }
+      ]
     }
   ]
 })

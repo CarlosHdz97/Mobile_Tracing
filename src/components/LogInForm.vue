@@ -43,7 +43,7 @@ export default {
             evt.preventDefault();
             this.form.btn_msg = 'cargando....';
             this.form.loading = false;
-            alert(JSON.stringify(this.form));
+            alert('Bienvenido '+ this.form.user);
         },
         onReset(evt) {
             evt.preventDefault();

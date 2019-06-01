@@ -1,7 +1,7 @@
 <template>
-  <div class="row justify-content-center align-items-center" style="min-height:100vh;">
+  <b-row align-v="center"  align-h="center" style="min-height:100vh;">
     <RecoveryPasswordForm class="col-md-5"/>
-  </div>
+  </b-row>
 </template>
 
 <script>

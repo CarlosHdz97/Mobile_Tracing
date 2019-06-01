@@ -1,0 +1,76 @@
+<template>
+    <b-row align-h="center">
+        <b-col md="6">
+            <b-form class="p-4 m-2" @submit="onSubmit" @reset="onReset" v-if="show">
+                <h3 class="text-center text-dark">Prestamo de equipo</h3>
+                <b-form-group label="Fecha de prestamo: ">
+                    <b-form-input type="date" v-model="form.fecha_prestamo" required></b-form-input>
+                </b-form-group>
+                <b-form-group label="Sucursal: ">
+                    <b-form-select v-model="form.sucursal" :options="options_sucursal"></b-form-select>
+                </b-form-group>
+                <b-form-group label="Entrega: ">
+                    <b-form-input type="text" v-model="form.entrega" placeholder="Ingrese el nombre de la persona" required></b-form-input>
+                </b-form-group>
+                <b-form-group label="Recibe: ">
+                    <b-form-input type="text" v-model="form.recibe" placeholder="Ingrese el nombre de la persona" required></b-form-input>
+                </b-form-group>
+                <div class="text-right">
+                    <b-button-group>
+                        <b-button  type="reset" variant="danger">Cancelar</b-button>
+                        <b-button type="submit" variant="primary">Guardar</b-button>
+                    </b-button-group>
+                </div>
+            </b-form>
+        </b-col>
+    </b-row>
+</template>
+<script>
+export default {
+
+    data(){
+        return{
+            form: {
+                fecha_prestamo: '',
+                sucursal: '',
+                entrega: '',
+                recibe: null,
+                accesorios: []
+            },
+            show: true,
+            options_sucursal : [
+                {value: "Apartado 1", text: "Apartado 1"},
+                {value: "Apartado 2", text: "Apartado 2"},
+                {value: "Brasil", text: "Brasil"},
+                {value: "Corona 1", text: "Corona 1"},
+                {value: "Corona 2", text: "Corona 2"},
+                {value: "Correo 1", text: "Correo 1"},
+                {value: "Correo 2", text: "Correo 2"},
+                {value: "San pablo 1", text: "San Pablo 1"},
+                {value: "San pablo 2", text: "San Pablo 2"},
+            ],
+        }
+    },
+    methods:{
+        onSubmit(evt) {
+            evt.preventDefault();
+            alert(JSON.stringify(this.form));
+        },
+        onReset(evt) {
+            evt.preventDefault();
+            // Reset our form values
+            this.form.user = '';
+            // Trick to reset/clear native browser form validation state
+            this.show = false
+            this.$nextTick(() => {
+            this.show = true
+            });
+            if(this.$store.state.mobile.status=="Asignado"){
+                this.$router.push({path:'create'});
+            }else{
+                this.$router.push({path:'/mobile'});
+            }
+        }
+    }
+}
+</script>
