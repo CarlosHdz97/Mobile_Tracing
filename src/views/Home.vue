@@ -1,5 +1,5 @@
 <template>
-    <b-row align-v="center"  align-h="center" style="min-height:100vh;">
+    <b-row align-v="center"  align-h="center" style="min-height:80vh;">
       <LogInForm class="col-md-5"/>
     </b-row>
 </template>

@@ -43,7 +43,15 @@ export default {
             evt.preventDefault();
             this.form.btn_msg = 'cargando....';
             this.form.loading = false;
-            alert('Bienvenido '+ this.form.user);
+            if(this.form.user =="Carlos" && this.form.password=="12345"){
+                this.$store.state.auth.authenticate = true;
+                this.$router.push({path:'mobile'});
+                alert("Bienvenido");
+            }else{
+                alert("Usuario o contraseña no válidos");
+                this.form.loading = true;
+                this.form.btn_msg = 'Iniciar sesión';
+            }
         },
         onReset(evt) {
             evt.preventDefault();
