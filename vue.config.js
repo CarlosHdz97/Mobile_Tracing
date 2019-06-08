@@ -1,4 +1,4 @@
 module.exports = {
-    publicPath: 'mobile-tracing',
+    publicPath: '/mobile-tracing/',
     outputDir: 'docs'
 }
