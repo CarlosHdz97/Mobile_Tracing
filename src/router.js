@@ -5,11 +5,12 @@ import store from './store'
 Vue.use(Router)
 
 function beforeEnter (to, from, next) {
+  let active = localStorage.getItem("authenticate");
   if(to.matched.some(record=>record.meta.reqAuth)){
-    if(store.state.auth.authenticate==false){
-      next({path: '/'})
-    }else{
+    if(active){
       next()
+    }else{
+      next({path: '/'})
     }
   }else{
     next()

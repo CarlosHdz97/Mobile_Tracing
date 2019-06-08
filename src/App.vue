@@ -17,39 +17,27 @@
 </style>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+//import {mapMutations} from 'vuex'
 export default {
   data(){
     return{
-      authenticate : this.$store.state.auth.authenticate
     }
   },
   created(){
     this.recoverySessionData();
-    this.validateSesion();
+  },
+  computed:{
+    authenticate(){
+      return this.$store.state.auth.authenticate;
+    }
   },
   methods:{
-    ...mapMutations(['authentication', 'deleteSession']),
+    //...mapMutations(['authentication', 'deleteSession']),
     recoverySessionData(){
-      let authenticate = JSON.parse(localStorage.getItem("authenticate"));
-      let jwt = JSON.parse(localStorage.getItem("jwt"));
-      let rol = JSON.parse(localStorage.getItem("rol"));
-      let permissions = JSON.parse(localStorage.getItem("permissions"));
-      console.log(authenticate);
-      if(authenticate!=false){
-        this.$store.state.auth.authenticate = authenticate; 
-        this.$store.state.auth.jwt = jwt; 
-        this.$store.state.auth.rol = rol; 
-        this.$store.state.auth.permissions = permissions; 
-        this.authenticate = authenticate;
-      }
-    },
-    validateSesion(){
-      this.authenticate = this.$store.state.auth.authenticate;
+      this.$store.commit('checkSession');
     },
     logOut(){
       this.$store.commit('deleteSession');
-      this.validateSesion();
       this.$router.push({path:'/'});
     }
   }

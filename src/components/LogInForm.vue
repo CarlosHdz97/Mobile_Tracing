@@ -47,14 +47,16 @@ export default {
 
             if(this.form.user =="Carlos" && this.form.password=="12345"){
                 var data = {
-                    "auth" : true,
+                    "authenticate" : true,
                     "jwt" : "dsads",
+                    "name" : "Carlos",
+                    "surname": "Hernández",
                     "rol" : [1,3,5],
                     "permissions" : ["eee"]
                 };
                 this.$store.commit('authentication',data);
                 this.$router.push({path:'mobile'});
-                alert("Bienvenido");
+                alert(`Bienvenido ${data.name}`);
             }else{
                 alert("Usuario o contraseña no válidos");
                 this.form.loading = true;
