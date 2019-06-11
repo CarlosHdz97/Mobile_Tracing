@@ -1,8 +1,11 @@
 <template>
     <div>
+        <b-alert show variant="danger" v-if="alert">
+            {{alert}}
+        </b-alert>
         <b-form class="p-4 m-2" @submit="onSubmit" @reset="onReset" v-if="show">
             <b-form-group label="Usuario: ">
-                <b-form-input type="text" v-model="form.user" placeholder="Ingrese su usuario" required></b-form-input>
+                <b-form-input type="text" v-model="form.user" placeholder="Ingrese su correo electrónico" required></b-form-input>
             </b-form-group>
             <b-form-group label="Password: ">
                 <b-input-group>
@@ -24,9 +27,11 @@
 </template>
 <script>
 import {mapMutations} from 'vuex'
+import Auth from '../services/API/Auth.js'
 export default {
     data(){
         return{
+            alert:'',
             form: {
                 user: '',
                 password: '',
@@ -44,24 +49,20 @@ export default {
             evt.preventDefault();
             this.form.btn_msg = 'cargando....';
             this.form.loading = false;
-
-            if(this.form.user =="Carlos" && this.form.password=="12345"){
-                var data = {
-                    "authenticate" : true,
-                    "jwt" : "dsads",
-                    "name" : "Carlos",
-                    "surname": "Hernández",
-                    "rol" : [1,3,5],
-                    "permissions" : ["eee"]
-                };
-                this.$store.commit('authentication',data);
-                this.$router.push({path:'mobile'});
-                alert(`Bienvenido ${data.name}`);
-            }else{
-                alert("Usuario o contraseña no válidos");
-                this.form.loading = true;
-                this.form.btn_msg = 'Iniciar sesión';
-            }
+            Auth.tryLogIn(this.form).then(res=>{
+                console.log(res);
+                if(res.token){
+                    this.$store.commit('authentication',res);
+                    this.$router.push({path:'inventory'});
+                    alert(`Bienvenido ${res.name}`);
+                }else{
+                    this.alert=res.msg;
+                    this.form.loading = true;
+                    this.form.btn_msg = 'Iniciar sesión';
+                }
+            }).catch(err=>{
+                console.log(err)
+            });
         },
         onReset(evt) {
             evt.preventDefault();

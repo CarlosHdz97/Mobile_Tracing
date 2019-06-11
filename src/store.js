@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const auth = {
   state: {
     authenticate : false,
-    jwt: '1111',
+    token: '',
     rol: [],
     permissions: [],
     name: '',
@@ -45,13 +45,27 @@ const auth = {
       let active = localStorage.getItem("authenticate");
       if(active){
         state.authenticate = localStorage.getItem("authenticate");
-        state.jwt = localStorage.getItem("jwt");
+        state.token = localStorage.getItem("token");
         state.name = localStorage.getItem("name");
         state.surname = localStorage.getItem("surname");
       }
     }
   },
   actions: {
+  }
+}
+const alerts = {
+  state: {
+    toDo:[{"msg": "malo", "variant":"danger"}],
+    done:[]
+  },
+  mutations:{
+    addAlert(state, data){
+      state.todo.push(data);
+    },
+  },
+  actions:{
+
   }
 }
 
@@ -73,6 +87,7 @@ const mobile = {
 export default new Vuex.Store({
   modules: {
     auth: auth,
-    mobile: mobile
+    mobile: mobile,
+    alerts: alerts
   }
 })

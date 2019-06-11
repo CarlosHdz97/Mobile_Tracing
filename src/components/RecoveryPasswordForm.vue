@@ -1,7 +1,7 @@
 <template>
     <b-form class="p-4 m-2" @submit="onSubmit" @reset="onReset" v-if="show">
         <b-form-group label="Usuario: ">
-            <b-form-input type="text" v-model="form.user" placeholder="Ingrese su usuario" required></b-form-input>
+            <b-form-input type="text" v-model="form.user" placeholder="Ingrese su correo electrónico" required></b-form-input>
         </b-form-group>
         <div class="text-right">
             <b-button-group>

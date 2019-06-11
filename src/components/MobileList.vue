@@ -12,7 +12,7 @@
               </b-button-group>
             </b-col>
             <b-col>
-              <b-table striped hover :items="items" class="mt-4"></b-table>
+              <!--<b-table striped hover :items="inventory" class="mt-4"></b-table>-->
             </b-col>
           </b-tab>
           <b-tab title="Accesorios">
@@ -32,18 +32,11 @@
   export default {
     data() {
       return {
-        items: [
-          { '# serie': 46554645, 'Modelo': 'Moto E5 plus', 'EMEI': 'werwe-788' },
-          { '# serie': 46554645, 'Modelo': 'Moto E5 plus', 'EMEI': 'dqwdq-4488' },
-          { '# serie': 21454654, 'Modelo': 'Moto E5', 'EMEI': 'wef-46465' },
-          { '# serie': 89455465, 'Modelo': 'Moto E5 plus', 'EMEI': 'wefwefw6-fw' },
-          { '# serie': 38465464, 'Modelo': 'Moto E5', 'EMEI': 'wefw-4698' }
-        ]
       }
     },
     methods: {
       addMobile(){
-        this.$router.push({path :'mobile/create'});
+        this.$router.push({path :'inventory/create'});
       }
     }
   }

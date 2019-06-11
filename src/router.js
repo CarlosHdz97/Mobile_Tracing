@@ -33,7 +33,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/RecoveryPassword.vue')
     },
     {
-      path: '/mobile',
+      path: '/inventory',
       meta: {reqAuth: true},
       redirect: '/',
       beforeEnter : beforeEnter,

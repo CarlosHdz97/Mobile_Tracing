@@ -6,6 +6,7 @@
       </b-col>
     </b-row>
     <router-view/>
+    
   </div>
 </template>
 
@@ -17,7 +18,6 @@
 </style>
 
 <script>
-//import {mapMutations} from 'vuex'
 export default {
   data(){
     return{
@@ -32,7 +32,6 @@ export default {
     }
   },
   methods:{
-    //...mapMutations(['authentication', 'deleteSession']),
     recoverySessionData(){
       this.$store.commit('checkSession');
     },
