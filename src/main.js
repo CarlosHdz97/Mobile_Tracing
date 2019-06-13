@@ -13,6 +13,16 @@ Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://localhost:8008'
 
 Vue.use(VueAxios,axios)
+router.beforeEach((to, from, next) => {
+  let active = localStorage.getItem("authenticate");
+  if((active && to.path!='/') || (!active && to.path=='/')){
+    next()
+  }else if(!active && to.path!='/'){
+    next('/')
+  }else{
+    next('/inventory')
+  }
+})
 
 new Vue({
   store,

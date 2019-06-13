@@ -1,5 +1,5 @@
 <template>
-    <b-form class="p-4 m-2" @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form class="p-4 m-2" @submit.prevent="onSubmit" @reset="onReset" v-if="show">
         <b-form-group label="Usuario: ">
             <b-form-input type="text" v-model="form.user" placeholder="Ingrese su correo electrónico" required></b-form-input>
         </b-form-group>
@@ -23,12 +23,10 @@ export default {
         }
     },
     methods:{
-        onSubmit(evt) {
-            evt.preventDefault();
+        onSubmit() {
             alert(JSON.stringify(this.form));
         },
-        onReset(evt) {
-            evt.preventDefault();
+        onReset() {
             // Reset our form values
             this.form.user = '';
             // Trick to reset/clear native browser form validation state

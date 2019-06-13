@@ -3,14 +3,16 @@
         <b-alert show variant="danger" v-if="alert">
             {{alert}}
         </b-alert>
-        <b-form class="p-4 m-2" @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form class="p-4 m-2" @submit.prevent="onSubmit" @reset="onReset" v-if="show">
             <b-form-group label="Usuario: ">
-                <b-form-input type="text" v-model="form.user" placeholder="Ingrese su correo electrónico" required></b-form-input>
+                <b-form-input type="text" v-model="form.user" placeholder="Ingrese su correo electrónico" required/>
             </b-form-group>
             <b-form-group label="Password: ">
                 <b-input-group>
-                    <b-input-group-text slot="append"><font-awesome-icon :icon="ic_password" @click="showPassword"/></b-input-group-text>
-                    <b-form-input :type="type_password_input" v-model="form.password" placeholder="Ingrese su contraseña" required></b-form-input>
+                    <b-input-group-text slot="append" @click="showPassword">
+                        <font-awesome-icon :icon="ic_password"/>
+                    </b-input-group-text>
+                    <b-form-input :type="type_password_input" v-model="form.password" placeholder="Ingrese su contraseña" required/>
                 </b-input-group>
                 <router-link to="/recoveryPassword">Recuperar contraseña</router-link> <br>
             </b-form-group>
@@ -45,8 +47,7 @@ export default {
     },
     methods:{
         ...mapMutations(['authentication']),
-        onSubmit(evt) {
-            evt.preventDefault();
+        onSubmit() {
             this.form.btn_msg = 'cargando....';
             this.form.loading = false;
             Auth.tryLogIn(this.form).then(res=>{
@@ -64,8 +65,7 @@ export default {
                 console.log(err)
             });
         },
-        onReset(evt) {
-            evt.preventDefault();
+        onReset() {
             // Reset our form values
             this.form.user = '';
             this.form.password = '';
