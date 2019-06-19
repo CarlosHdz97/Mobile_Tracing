@@ -51,7 +51,6 @@ export default {
             this.form.btn_msg = 'cargando....';
             this.form.loading = false;
             Auth.tryLogIn(this.form).then(res=>{
-                console.log(res);
                 if(res.token){
                     this.$store.commit('authentication',res);
                     this.$router.push({path:'inventory'});

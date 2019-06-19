@@ -36,6 +36,10 @@ export default new Router({
           component: () => import('./components/MobileForm.vue')
         },
         {
+          path: 'createAccesory',
+          component: () => import('./components/AccesoryForm.vue')
+        },
+        {
           path: 'assign',
           component: () => import('./components/AssignMobileForm.vue')
         },{

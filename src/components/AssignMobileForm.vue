@@ -15,6 +15,13 @@
                 <b-form-group label="Recibe: ">
                     <b-form-input type="text" v-model="form.recibe" placeholder="Ingrese el nombre de la persona" required></b-form-input>
                 </b-form-group>
+                <b-form-group label="Accesorios:">
+                    <b-form-checkbox-group v-model="form.accesorios">
+                        <b-form-checkbox value="Cable">Cable</b-form-checkbox>
+                        <b-form-checkbox value="Eliminador de corriente">Eliminador de corriente</b-form-checkbox>
+                        <b-form-checkbox value="Funda">Funda</b-form-checkbox>
+                    </b-form-checkbox-group>
+                </b-form-group>
                 <div class="text-right">
                     <b-button-group>
                         <b-button  type="reset" variant="danger">Cancelar</b-button>
@@ -67,10 +74,10 @@ export default {
             this.$nextTick(() => {
             this.show = true
             });
-            if(this.$store.state.mobile.status=="Asignado"){
+            if(this.$store.state.mobile.status==true){
                 this.$router.push({path:'create'});
             }else{
-                this.$router.push({path:'/mobile'});
+                this.$router.push({path:'/inventory'});
             }
         }
     }

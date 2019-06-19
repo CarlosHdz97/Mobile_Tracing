@@ -54,23 +54,10 @@ const auth = {
   actions: {
   }
 }
-const alerts = {
-  state: {
-    toDo:[{"msg": "malo", "variant":"danger"}],
-    done:[]
-  },
-  mutations:{
-    addAlert(state, data){
-      state.todo.push(data);
-    },
-  },
-  actions:{
-
-  }
-}
 
 const mobile = {
   state: {
+    id: null,
     modelo: '',
     serie: '',
     emei: '',
@@ -78,7 +65,50 @@ const mobile = {
     status: null
   },
   mutations: {
+    storeMobileData(state, data){
+      state.id = data.id;
+      state.modelo = data.modelo;
+      state.serie = data.serie;
+      state.emei = data.emei;
+      state.accesorios = data.accesorios.split(',');
+      state.status = data.status;
+    },
+    deleteMobileData(state){
+      state.id = null,
+      state.modelo = '',
+      state.serie = '',
+      state.emei = '',
+      state.accesorios = [],
+      state.status = null
+    }
+  },
+  actions: {
+  }
+}
 
+const accesory = {
+  state: {
+    id: null,
+    name: '',
+    existencia: 0,
+    stockMin: 0,
+    stockMax: 0
+  },
+  mutations: {
+    storeAccesoryData(state, data){
+      state.id = data.id;
+      state.name = data.name;
+      state.existencia = data.existencia;
+      state.stockMin = data.stockMin;
+      state.stockMax = data.stockMax;
+    },
+    deleteAccesoryData(state){
+      state.id = null,
+      state.name = '',
+      state.existencia = 0,
+      state.stockMin = 0,
+      state.stockMax = 0
+    }
   },
   actions: {
   }
@@ -88,6 +118,6 @@ export default new Vuex.Store({
   modules: {
     auth: auth,
     mobile: mobile,
-    alerts: alerts
+    accesory: accesory
   }
 })
