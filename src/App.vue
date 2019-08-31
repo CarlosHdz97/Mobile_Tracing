@@ -11,7 +11,7 @@
 </template>
 
 <style>
-  form{
+  form.form{
     border-radius: 5px 5px 15px 15px;
     box-shadow: 0px 5px 15px #d6d6d6;
   }

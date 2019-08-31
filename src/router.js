@@ -21,6 +21,20 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/RecoveryPassword.vue')
     },
     {
+      path: '/welcome',
+      name: 'welcome',
+      component: () => import('./views/Welcome.vue')
+    },
+    {
+      path: '/home',
+      component: () => import('./views/Init.vue')
+    },
+    {
+      path: '/user',
+      name: 'users',
+      component: () => import('./views/User.vue')
+    },
+    {
       path: '/inventory',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route

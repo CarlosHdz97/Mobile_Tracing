@@ -1,7 +1,7 @@
 <template>
     <b-row align-h="center">
         <b-col md="6">
-            <b-form class="p-4 m-2" @submit="onSubmit" @reset="onReset" v-if="show">
+            <b-form class="p-4 m-2 form" @submit="onSubmit" @reset="onReset" v-if="show">
                 <h3 class="text-center text-dark">Prestamo de equipo</h3>
                 <b-form-group label="Fecha de prestamo: ">
                     <b-form-input type="date" v-model="form.fecha_prestamo" required></b-form-input>

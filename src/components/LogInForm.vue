@@ -3,7 +3,7 @@
         <b-alert show variant="danger" v-if="alert">
             {{alert}}
         </b-alert>
-        <b-form class="p-4 m-2" @submit.prevent="onSubmit" @reset="onReset" v-if="show">
+        <b-form class="p-4 m-2 form" @submit.prevent="onSubmit" @reset="onReset" v-if="show">
             <b-form-group label="Usuario: ">
                 <b-form-input type="text" v-model="form.user" placeholder="Ingrese su correo electrónico" required/>
             </b-form-group>

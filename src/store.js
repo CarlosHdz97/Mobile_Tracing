@@ -10,7 +10,7 @@ const auth = {
     rol: [],
     permissions: [],
     name: '',
-    surname: ''
+    surname: '' 
   },
   mutations: {
     authentication(state, data){
@@ -114,10 +114,27 @@ const accesory = {
   }
 }
 
+const user = {
+  state: {
+    available: [],
+    disavailable: [],
+    selected: []
+  },
+  mutations:{
+    storeUserData(state, data){
+      state.available = data.available;
+      state.disavailable = data.disavailable;
+    },
+    storeSelectedData(state, data){
+      state.selected = data;
+    }
+  }
+}
 export default new Vuex.Store({
   modules: {
     auth: auth,
     mobile: mobile,
-    accesory: accesory
+    accesory: accesory,
+    user: user
   }
 })

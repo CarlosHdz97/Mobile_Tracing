@@ -18,7 +18,15 @@ export default {
         const response = await axios.get('/mobile/');
         return response.data;
     },
+    async trygetQuantity(){
+        const response = await axios.get('/mobile/quantity');
+        return response.data;
+    },
     async tryfind($id){
+        const response = await axios.get('/mobile/'+$id);
+        return response.data;
+    },
+    async tryCreateHistoric($id){
         const response = await axios.get('/mobile/'+$id);
         return response.data;
     }

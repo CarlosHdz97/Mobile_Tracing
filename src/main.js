@@ -8,10 +8,11 @@ import store from './store'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Chart from 'chart.js'
 
 Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://localhost:8008'
-
+//axios.defaults.baseURL = 'http://18.205.144.146:2222/Inventory_API/public'
 Vue.use(VueAxios,axios)
 router.beforeEach((to, from, next) => {
   let active = localStorage.getItem("authenticate");

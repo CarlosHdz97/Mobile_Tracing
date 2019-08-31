@@ -1,7 +1,7 @@
 <template>
     <b-row align-h="center">
         <b-col md="6">
-            <b-form class="p-4" @submit.prevent="onSubmit" @reset.prevent="onReset" v-if="show">
+            <b-form class="p-4 form" @submit.prevent="onSubmit" @reset.prevent="onReset" v-if="show">
                 <h3 class="text-center text-dark">{{msg_form}}</h3>
                 <b-form-group label="Nombre: ">
                     <b-form-input type="text" v-model="form.name" placeholder="Ingrese el nombre" required></b-form-input>
@@ -75,6 +75,7 @@ export default {
                 Accesory.tryCreate(this.form).then(res=>{
                     alert("Accesorio agregado correctamente");
                     this.clearForm();
+                    this.$router.push({path :'/inventory'});
                 }).catch(err=>{
                    alert("No se ha podido registrar el accesorio!!");
                    this.err.name = err.response.data.name[0];

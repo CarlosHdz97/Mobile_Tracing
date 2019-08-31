@@ -1,7 +1,7 @@
 <template>
 <b-row align-h="center">
     <b-col md="6">
-        <b-form class="p-4" @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form class="p-4 form p-5" @submit="onSubmit" @reset="onReset" v-if="show">
             <h3 class="text-center text-dark">{{msg_form}}</h3>
             <b-form-group label="Modelo: ">
                 <b-form-input type="text" v-model="form.modelo" placeholder="Ingrese el modelo" required></b-form-input>
@@ -26,9 +26,6 @@
                     <b-form-checkbox value="Funda">Funda</b-form-checkbox>
                 </b-form-checkbox-group>
             </b-form-group>
-            <b-form-group label="Status: ">
-                <b-form-select v-model="form.status" :options="options_status" @change="statusChange" required></b-form-select>
-            </b-form-group>
             <div class="text-right">
                 <b-button-group>
                     <b-button  type="reset" variant="danger">Cancelar</b-button>
@@ -50,16 +47,12 @@ export default {
                 modelo: '',
                 serie: '',
                 emei: '',
-                status: null,
                 accesorios : [],
-                log:[]
+                log:[],
+                entrego: this.$store.state.auth.name + this.$store.state.auth.surname
             },
             show: true,
-            btn_txt :'Guardar',
-            options_status : [
-                {value: 1, text: "Asignado"},
-                {value: 0, text: "Sin asignar"}
-            ],
+            btn_txt : this.$store.state.mobile.id ? 'Actualizar' : 'Guardar',
             err:{
                 emei: '',
                 serie: ''
@@ -82,13 +75,14 @@ export default {
         ...mapMutations(['deleteMobileData']),
         onSubmit(evt) {
             evt.preventDefault();
-            if(this.btn_txt=='Guardar'){
+            if(this.btn_txt=='Guardar' || this.btn_txt=='Actualizar'){
                 if(this.$store.state.mobile.id){
                     Mobile.tryUpdate(this.form).then(res=>{
                         this.$store.commit('deleteMobileData');
                         alert("Teléfono actualizado exitosamente");
                         this.$router.push({path :'/inventory'});
                     }).catch(err=>{
+                        console.log(err);
                         this.err.emei = err.response.data.emei[0];
                         this.err.serie = err.response.data.serie[0];
                         alert("No se han podido actualizar los datos  del teléfono");
@@ -100,7 +94,6 @@ export default {
                         this.form.modelo = '';
                         this.form.serie = '';
                         this.form.emei = '';
-                        this.form.status = '';
                         this.form.accesorios = [];
                         this.form.log = '';
                         }
@@ -114,7 +107,6 @@ export default {
                 this.$store.state.mobile.modelo = this.form.modelo;
                 this.$store.state.mobile.serie = this.form.serie;
                 this.$store.state.mobile.emei = this.form.emei;
-                this.$store.state.mobile.status = this.form.status;
                 this.$store.state.mobile.accesorios = this.form.accesorios;
                 this.$router.push({path:'assign'});
             }
@@ -130,21 +122,12 @@ export default {
             this.show = true
             });
         },
-        statusChange(){
-            if(this.form.status==true){
-                this.btn_txt = "Siguiente";
-            }else{
-                this.btn_txt = "Guardar";
-            }
-        },
         getData(){
             this.form.id = this.$store.state.mobile.id;
             this.form.modelo = this.$store.state.mobile.modelo;
             this.form.serie = this.$store.state.mobile.serie;
             this.form.emei = this.$store.state.mobile.emei;
-            this.form.status = this.$store.state.mobile.status;
             this.form.accesorios = this.$store.state.mobile.accesorios;
-            this.statusChange();
         }
     }
 }
